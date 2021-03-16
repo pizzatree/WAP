@@ -1,0 +1,3 @@
+Schedule and deliverable:
+    Basic Penguin Model                         -- Monday 5pm (estimate: 3 hrs)
+    Set up Basic Networked Game with Walking    -- Tuesday by 5pm (estimate: 2 hrs)
