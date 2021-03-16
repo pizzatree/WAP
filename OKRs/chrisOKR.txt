@@ -1,0 +1,3 @@
+Schedule and deliverable:
+    Implement Jetpack functionality    -- Tue by 10 PM (estimate: 3 hours)
+    Implement Bellyslide functionality -- Wed by 5 PM (estimate: 3 hours)
