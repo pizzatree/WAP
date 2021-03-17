@@ -1,4 +1,5 @@
 ﻿using System;
+using Managers;
 using Mirror;
 using UnityEngine;
 
@@ -27,6 +28,18 @@ namespace Player
                 return;
             
             CameraManager.Instance?.HandleLostCharacter();
+        }
+        
+        private void OnCollisionEnter(Collision other)
+        {
+            if(other.gameObject.layer == LayerMask.NameToLayer("Surface"))
+                SendMessage("HandleGrounded", true);
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            if(other.gameObject.layer == LayerMask.NameToLayer("Surface"))
+                SendMessage("HandleGrounded", false);
         }
     }
 }
