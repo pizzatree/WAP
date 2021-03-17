@@ -34,6 +34,10 @@ namespace Player
                                        Input.GetAxis("Mouse X") * camRotSpeed,
                                        0); // no Y rotation on the model, no head animations yet
 
+            // I know this should be in FixedUpdate()
+            // but otherwise the game is unplayable, turning the camera is VERY stuttery
+            rb.MoveRotation(rb.rotation * Quaternion.Euler(newRotOffset * Time.deltaTime)); 
+
             if(Input.GetKeyDown(KeyCode.Space))
                 Jump();
         }
@@ -53,7 +57,7 @@ namespace Player
 
             rb.AddForce(motion, ForceMode.Acceleration);
             //rb.MovePosition(rb.position + (motion * Time.fixedDeltaTime));
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(newRotOffset * Time.fixedDeltaTime));
+            // rb.MoveRotation(rb.rotation * Quaternion.Euler(newRotOffset * Time.fixedDeltaTime));
         }
         
         // Called by PlayerBase via Message

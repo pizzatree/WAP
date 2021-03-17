@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &27608317393752332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6084839468996466486}
+  m_Layer: 0
+  m_Name: RocketLauncherPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6084839468996466486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27608317393752332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1.25, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6727814783148348578}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5338617805168458709
 GameObject:
   m_ObjectHideFlags: 0
@@ -48,6 +78,7 @@ GameObject:
   - component: {fileID: 3118118134388407140}
   - component: {fileID: 3468958366310671420}
   - component: {fileID: 5898485731998769732}
+  - component: {fileID: 2766220498648193678}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -68,6 +99,7 @@ Transform:
   m_Children:
   - {fileID: 2238971331022549697}
   - {fileID: 128712694864679707}
+  - {fileID: 6084839468996466486}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -211,6 +243,22 @@ MonoBehaviour:
   syncInterval: 0.1
   regPMat: {fileID: 13400000, guid: 5a4f31d0f1ec8214182079b4594dc2ef, type: 2}
   slidePMat: {fileID: 13400000, guid: 0724d903ace34484681339085775e5aa, type: 2}
+--- !u!114 &2766220498648193678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447938855704491456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a013d118320d67b4b9962cd8865126d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  rocketPrefab: {fileID: 3239306268021155458, guid: 5779bb660dbd36a4dbe2fea713d869d2, type: 3}
+  rocketLaunchPos: {fileID: 6084839468996466486}
 --- !u!1001 &1772401668887713066
 PrefabInstance:
   m_ObjectHideFlags: 0
