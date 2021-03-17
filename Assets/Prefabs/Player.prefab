@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 1686598258760748178}
   - component: {fileID: 3118118134388407140}
   - component: {fileID: 3468958366310671420}
+  - component: {fileID: 5898485731998769732}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -147,8 +148,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   motion: {x: 0, y: 0, z: 0}
-  moveSpeed: 3
+  moveSpeed: 15
   camRotSpeed: 100
+  jumpForce: 10
 --- !u!114 &1686598258760748178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +192,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac2347d54528cd4ca29785d1ca08ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  verticalThrust: 15
+--- !u!114 &5898485731998769732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447938855704491456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b3e0cce9bc75544a018587be26d991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  regPMat: {fileID: 13400000, guid: 5a4f31d0f1ec8214182079b4594dc2ef, type: 2}
+  slidePMat: {fileID: 13400000, guid: 0724d903ace34484681339085775e5aa, type: 2}
 --- !u!1001 &1772401668887713066
 PrefabInstance:
   m_ObjectHideFlags: 0

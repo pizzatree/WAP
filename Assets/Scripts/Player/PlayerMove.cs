@@ -51,7 +51,8 @@ namespace Player
             if(!isLocalPlayer)
                 return;
 
-            rb.MovePosition(rb.position + (motion * Time.fixedDeltaTime));
+            rb.AddForce(motion, ForceMode.Acceleration);
+            //rb.MovePosition(rb.position + (motion * Time.fixedDeltaTime));
             rb.MoveRotation(rb.rotation * Quaternion.Euler(newRotOffset * Time.fixedDeltaTime));
         }
         
