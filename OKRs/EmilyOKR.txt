@@ -1,4 +1,0 @@
-Schedule and deliverable:
-
-Create Rocket Launcher Model -- Tuesday by 11:59 PM (Estimate: 4 hours)
-Create Jetpack Model -- Tuesday by 11:59 PM (Estimate: 4 hours)
