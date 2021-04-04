@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 3468958366310671420}
   - component: {fileID: 5898485731998769732}
   - component: {fileID: 2766220498648193678}
+  - component: {fileID: 7060850810863097163}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -200,7 +201,7 @@ MonoBehaviour:
   mvmt: {x: 0, y: 0, z: 0}
   mvmtSlide: {x: 0, y: 0, z: 0}
   moveSpeed: 5
-  camRotSpeed: 200
+  camRotSpeed: 150
   jumpForce: 5
   slideSpeed: 10
 --- !u!114 &1686598258760748178
@@ -279,6 +280,22 @@ MonoBehaviour:
   syncInterval: 0.1
   rocketPrefab: {fileID: 3239306268021155458, guid: 5779bb660dbd36a4dbe2fea713d869d2, type: 3}
   rocketLaunchPos: {fileID: 6084839468996466486}
+--- !u!114 &7060850810863097163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447938855704491456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  animator: {fileID: 4849618438951103761}
 --- !u!1001 &1772401668887713066
 PrefabInstance:
   m_ObjectHideFlags: 0
