@@ -11,10 +11,12 @@ namespace Player
         private bool sliding;
 
         private Collider[] colliders;
+        private Animator ani;
 
         private void Start()
         {
             colliders = GetComponentsInChildren<Collider>();
+            ani = GetComponentInChildren<Animator>();
         }
 
         private void Update()
@@ -32,6 +34,8 @@ namespace Player
                 SetCollidersToSlide();
             else
                 ResetColliders();
+
+            ani.SetBool("isSliding", sliding); // should probably move this somewhere else, but this works for now
         }
 
         private void ResetColliders()
@@ -48,6 +52,10 @@ namespace Player
         {
             foreach(var collider in colliders)
                 collider.material = newMaterial;
+        }
+
+        public bool GetSliding() {
+            return sliding;
         }
 
         // Called by PlayerBase via Message
