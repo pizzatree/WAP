@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Bot.States;
 using Mirror;
 using Player;
@@ -38,8 +39,13 @@ namespace Bot
             sm.AddTransition(aggro, findFlag, EnemyIsWithinRange());
             sm.AddTransition(aggro, findFlag, EnemyIsNotWithinRange());
 
-            Func<bool> EnemyIsWithinRange() => () => true; // put logic for seeing if there are nearby enemies
-            Func<bool> EnemyIsNotWithinRange() => () => false; // put logic for seeing if there are nearby enemies
+            Func<bool> EnemyIsWithinRange() => () => 15f >= Vector3.Distance(transform.position, (FindObjectsOfType<Purple>())
+                .OrderBy(t=> Vector3.Distance(transform.position, t.transform.position))
+                .FirstOrDefault().GetComponent<Transform>().position);
+            
+            Func<bool> EnemyIsNotWithinRange() => () => 15f < Vector3.Distance(transform.position, (FindObjectsOfType<Purple>())
+                .OrderBy(t=> Vector3.Distance(transform.position, t.transform.position))
+                .FirstOrDefault().GetComponent<Transform>().position);
         }
     }
 }
