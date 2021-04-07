@@ -1,4 +1,5 @@
 ﻿using System;
+using Inputs;
 using Managers;
 using Mirror;
 using UnityEngine;
@@ -6,30 +7,34 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(PlayerMove),
-                         typeof(PlayerCursor),
                          typeof(Rigidbody))]
     [SelectionBase]
     public class PlayerBase : NetworkBehaviour
     {
         [SerializeField]
         private Transform cameraTransform; // for the love of all that's holy we must do this differently
-                                           // when it's more built up
+        // when it's more built up
+
+        public IInputs InputHandler { get; private set; }
 
         public override void OnStartLocalPlayer()
         {
             base.OnStartLocalPlayer();
 
+            gameObject.AddComponent<PlayerCursor>();
             CameraManager.Instance?.HandleNewCharacter(cameraTransform);
+
+            InputHandler = new KBM();
         }
 
         private void OnDisable()
         {
             if(!isLocalPlayer)
                 return;
-            
+
             CameraManager.Instance?.HandleLostCharacter();
         }
-        
+
         private void OnCollisionEnter(Collision other)
         {
             if(other.gameObject.layer == LayerMask.NameToLayer("Surface"))
