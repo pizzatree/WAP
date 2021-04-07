@@ -1,6 +1,7 @@
 using Mirror;
 using UnityEngine;
 
+// TODO: REFACTOR THIS NOT TO INCLUDE PLAYER REFERENCES
 namespace Player
 {
     public class PlayerMove : NetworkBehaviour

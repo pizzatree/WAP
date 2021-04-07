@@ -1,16 +1,17 @@
-﻿using Mirror;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Player
+namespace Inputs
 {
-    public class PlayerCursor : NetworkBehaviour // probably doesn't need to be a netbehaviour
+    public class PlayerCursor : MonoBehaviour
     {
-        public override void OnStartLocalPlayer()
+        private IInputs inputs;
+        
+        private void OnEnable()
         {
-            base.OnStartLocalPlayer();
-
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible   = false;
+
+            inputs = GetComponent<IInputs>();
         }
 
         private void OnDisable()
@@ -21,15 +22,13 @@ namespace Player
 
         private void Update()
         {
-            if(!isLocalPlayer || !Input.GetKeyDown(KeyCode.Escape))
+            if(!inputs.PressedPause())
                 return;
 
             Cursor.lockState = (Cursor.lockState != CursorLockMode.None)
                 ? CursorLockMode.None
                 : CursorLockMode.Confined;
             Cursor.visible = !Cursor.visible;
-
-            Debug.Log("Stop hardcoding the cursor lock when inputs class is made.");
         }
     }
 }
