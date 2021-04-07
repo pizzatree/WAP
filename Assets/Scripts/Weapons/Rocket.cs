@@ -1,4 +1,5 @@
 using Mirror;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Rocket : NetworkBehaviour
@@ -7,21 +8,30 @@ public class Rocket : NetworkBehaviour
     public Vector3 travelDir = Vector3.zero;
     public float rocketSpeed = 0.2f;
 
+    [SerializeField] private GameObject explosionParticles;
+
     void Update()
     {
         timeSinceInstantiated += Time.deltaTime;
 
         this.transform.position += travelDir*rocketSpeed;
 
-        if (timeSinceInstantiated > 1.5f) {
-            Destroy(gameObject);
+        if (timeSinceInstantiated > 1.5f) 
+        {
+            BlowUp();
         }
     }
 
     void OnCollisionEnter(Collision col)
     {
         if (timeSinceInstantiated > 0.2f)
-            Destroy(gameObject);
+            BlowUp();
+    }
+
+    private void BlowUp()
+    {
+        Instantiate(explosionParticles, transform.position, Quaternion.identity, null);
+        Destroy(gameObject);
     }
 
 }
