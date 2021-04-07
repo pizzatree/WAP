@@ -120,8 +120,9 @@ GameObject:
   - component: {fileID: 7060850810863097163}
   - component: {fileID: 9128021318033790487}
   - component: {fileID: 1321721737182169851}
+  - component: {fileID: 2090336275921111189}
   m_Layer: 0
-  m_Name: Player
+  m_Name: AI Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6447938855704491456}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47b47e84426e6f745bfdc7de433aa4e8, type: 3}
   m_Name: 
@@ -434,6 +435,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2090336275921111189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447938855704491456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19d0efba2a409849a6ff8948ab4bcab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1001 &1772401668887713066
 PrefabInstance:
   m_ObjectHideFlags: 0
