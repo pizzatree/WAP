@@ -15,7 +15,7 @@ namespace Player
         private Transform cameraTransform; // for the love of all that's holy we must do this differently
         // when it's more built up
 
-        private IInputs inputHandler;
+        public IInputs InputHandler { get; private set; }
 
         public override void OnStartLocalPlayer()
         {
@@ -24,7 +24,7 @@ namespace Player
             gameObject.AddComponent<PlayerCursor>();
             CameraManager.Instance?.HandleNewCharacter(cameraTransform);
 
-            inputHandler = new KBM();
+            InputHandler = new KBM();
         }
 
         private void OnDisable()

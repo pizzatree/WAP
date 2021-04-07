@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Inputs;
+using UnityEngine;
 
 public class KBM : IInputs
 {
@@ -33,6 +34,14 @@ public class KBM : IInputs
     public bool HoldingSlide()
         => Input.GetKey(KeyCode.LeftControl);
 
+    public bool PressedFire()
+        => Input.GetMouseButtonDown(0);
+
+    public bool PressedReload()
+        => Input.GetKeyDown(KeyCode.R);
+
+    public bool PressedPause()
+        => Input.GetKeyDown(KeyCode.Escape);
 
     public bool PressedSlap()
         => Input.GetMouseButtonDown(1);

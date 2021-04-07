@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Player;
+using UnityEngine;
 
 namespace Inputs
 {
@@ -11,7 +12,7 @@ namespace Inputs
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible   = false;
 
-            inputs = GetComponent<IInputs>();
+            inputs = GetComponent<PlayerBase>().InputHandler;
         }
 
         private void OnDisable()
@@ -22,9 +23,9 @@ namespace Inputs
 
         private void Update()
         {
-            if(!inputs.PressedPause())
+            if(inputs != null && !inputs.PressedPause() )
                 return;
-
+            
             Cursor.lockState = (Cursor.lockState != CursorLockMode.None)
                 ? CursorLockMode.None
                 : CursorLockMode.Confined;
