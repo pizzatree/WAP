@@ -18,17 +18,15 @@ namespace Bot.States
         public void Tick()
         {
             // basically update
+            if (agent != null) {
+                agent.SetDestination(GameObject.Find("Flag").transform.position);
+            }
         }
 
         public void OnEnter()
         {
             // probably find target flag here
-            Debug.Log("PursueFlag OnEnter()");
             agent.enabled = true;
-            if (agent != null) {
-                Debug.Log("Set Agent Destination");
-                agent.SetDestination(GameObject.Find("Flag").transform.position);
-            }
         }
 
         public void OnExit()

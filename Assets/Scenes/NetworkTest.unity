@@ -569,7 +569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6447938855704491456, guid: 6ed323fc84a1e2343a37d8e8a5ade7cd, type: 3}
       propertyPath: m_Name
-      value: AI Player (1)
+      value: AI Player
       objectReference: {fileID: 0}
     - target: {fileID: 6727814783148348578, guid: 6ed323fc84a1e2343a37d8e8a5ade7cd, type: 3}
       propertyPath: m_RootOrder
