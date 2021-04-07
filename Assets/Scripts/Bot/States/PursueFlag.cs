@@ -1,16 +1,18 @@
 ﻿using Player;
+using UnityEngine;
+using UnityEngine.AI;
 
 namespace Bot.States
 {
-    public class FindFlag : IState
+    public class PursueFlag : IState
     {
-        private PlayerMove movement;
+        private NavMeshAgent agent;
 
         // pro tip: when adding new fields in Rider
         // "ctorf" auto populates constructor with said fields
-        public FindFlag(PlayerMove movement)
+        public PursueFlag(NavMeshAgent agent)
         {
-            this.movement = movement;
+            this.agent = agent;
         }
     
         public void Tick()
@@ -21,11 +23,18 @@ namespace Bot.States
         public void OnEnter()
         {
             // probably find target flag here
+            Debug.Log("PursueFlag OnEnter()");
+            agent.enabled = true;
+            if (agent != null) {
+                Debug.Log("Set Agent Destination");
+                agent.SetDestination(GameObject.Find("Flag").transform.position);
+            }
         }
 
         public void OnExit()
         {
             // clean up?
+            agent.enabled = false;
         }
 
         // find target()
