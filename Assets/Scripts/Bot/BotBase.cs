@@ -12,7 +12,7 @@ namespace Bot
     {
         private StateMachine sm;
 
-        private PlayerMove movement; // get component or assemble in start?
+        private PenguinMove movement; // get component or assemble in start?
         private NavMeshAgent agent;
         // or use something else, leaving as example of how to use the states
         

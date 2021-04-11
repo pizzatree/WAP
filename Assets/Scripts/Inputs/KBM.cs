@@ -15,9 +15,9 @@ namespace Inputs
         public Vector2 AimDirection()
         {
             var x = Input.GetAxisRaw("Mouse X");
-            var y = Input.GetAxisRaw("Mouse Y");
+            var y = Input.GetAxisRaw("Mouse Y") * Preferences.AimInverted;
 
-            return new Vector2(x, y);
+            return new Vector2(x, y) * Preferences.AimSensitivity;
         }
 
         public bool PressedJump()

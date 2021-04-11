@@ -12,7 +12,7 @@ namespace Inputs
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible   = false;
 
-            inputs = GetComponent<PlayerBase>().InputHandler;
+            inputs = GetComponent<PenguinBase>().InputHandler;
         }
 
         private void OnDisable()

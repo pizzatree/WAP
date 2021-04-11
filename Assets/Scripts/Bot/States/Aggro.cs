@@ -4,11 +4,11 @@ namespace Bot.States
 {
     public class Aggro : IState
     {
-        private PlayerMove movement;
+        private PenguinMove movement;
 
         // pro tip: when adding new fields in Rider
         // "ctorf" auto populates constructor with said fields
-        public Aggro(PlayerMove movement)
+        public Aggro(PenguinMove movement)
         {
             this.movement = movement;
         }

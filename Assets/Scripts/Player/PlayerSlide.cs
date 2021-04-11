@@ -58,7 +58,7 @@ namespace Player
             return sliding;
         }
 
-        // Called by PlayerBase via Message
+        // Called by PenguinBase via Message
         private void HandleGrounded(bool newValue) => grounded = newValue;
     }
 }

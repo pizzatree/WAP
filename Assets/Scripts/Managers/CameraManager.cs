@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 // should make this way more robust honestly
@@ -12,7 +13,10 @@ namespace Managers
         private Vector3    menuPos;
         private Quaternion menuRot;
 
-        private Transform mainCamTransform;
+        //private Transform mainCamTransform;
+
+        [SerializeField]
+        private CinemachineVirtualCamera playerCam, birdsEyeCam;
 
         private void Awake()
         {
@@ -26,25 +30,17 @@ namespace Managers
             Destroy(gameObject);
         }
 
-        private void Start()
+        public void HandleNewCharacter(Transform newFollow)
         {
-            mainCamTransform = Camera.main.transform;
-
-            menuPos = mainCamTransform.position;
-            menuRot = mainCamTransform.rotation;
-        }
-
-        public void HandleNewCharacter(Transform newParent)
-        {
-            mainCamTransform.parent        = newParent;
-            mainCamTransform.localPosition = Vector3.zero;
+            playerCam.gameObject.SetActive(true);
+            birdsEyeCam.gameObject.SetActive(false);
+            playerCam.Follow = newFollow;
         }
 
         public void HandleLostCharacter()
         {
-            mainCamTransform.parent   = null;
-            mainCamTransform.position = menuPos;
-            mainCamTransform.rotation = menuRot;
+            playerCam.gameObject.SetActive(false);
+            birdsEyeCam.gameObject.SetActive(true);
         }
     }
 }

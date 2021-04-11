@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace Player
     {
         public GameObject rocketPrefab;
         public Transform rocketLaunchPos;
+        
+        public event Action OnFire;
 
         private void Start()
         {
@@ -23,6 +26,9 @@ namespace Player
 
         [Command]
         void CmdSpawnRocket() {
+            
+            OnFire?.Invoke();
+
             GameObject rocket = GameObject.Instantiate(rocketPrefab, rocketLaunchPos.position, rocketLaunchPos.rotation) as GameObject;
             rocket.GetComponent<Rocket>().travelDir = this.transform.forward;
             NetworkServer.Spawn(rocket);
