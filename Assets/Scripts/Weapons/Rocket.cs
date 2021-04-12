@@ -7,6 +7,7 @@ public class Rocket : NetworkBehaviour
     private float timeSinceInstantiated = 0;
     public Vector3 travelDir = Vector3.zero;
     public float rocketSpeed = 0.2f;
+    public float travelTime = 2.0f;
 
     [SerializeField] private GameObject explosionParticles;
 
@@ -16,7 +17,7 @@ public class Rocket : NetworkBehaviour
 
         this.transform.position += travelDir*rocketSpeed;
 
-        if (timeSinceInstantiated > 1.5f) 
+        if (timeSinceInstantiated > travelTime)
         {
             BlowUp();
         }
