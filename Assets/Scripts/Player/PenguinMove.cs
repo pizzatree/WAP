@@ -32,6 +32,8 @@ namespace Player
             if(!isLocalPlayer || inputs == null)
                 return;
 
+            rb.isKinematic = false;
+
             // basic motion & rotation
             var moveInput = inputs.MoveDirection();
             moveValue = transform.forward * (moveSpeed * (int) moveInput.y) +
