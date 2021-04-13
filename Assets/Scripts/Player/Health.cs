@@ -13,9 +13,9 @@ namespace Health
     public class Health
     {
         private float health;
-        public event Action<float> OnHealthChanged;
+        public event Notify HealthChanged;
 
-        public void Start()
+        public void StartProcess()
         {
             Console.WriteLine("Process Started!");
             // some code here..
