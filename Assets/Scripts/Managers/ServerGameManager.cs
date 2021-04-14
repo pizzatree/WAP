@@ -66,6 +66,7 @@ public class ServerGameManager : NetworkBehaviour
 
             if (gameState == GameState.TeamSelection) { // basically do nothing, wait until host is ready
                 //Debug.Log("Game State: Team Selection");
+                GameObject.Find("CountdownText").GetComponent<Text>().text = "Press enter to start!";
 
                 if (Input.GetKeyDown(KeyCode.Return)) { // this is what I'm using to "ready up" the server
                     RpcCloseDoors();
@@ -75,6 +76,7 @@ public class ServerGameManager : NetworkBehaviour
             }
             else if (gameState == GameState.GameReady) { // spawn in flags, do countdown, Open Doors
                 //Debug.Log("Game State: Game Ready");
+
 
                 time += Time.deltaTime;
                 if ((int)time <= 6)
@@ -143,6 +145,8 @@ public class ServerGameManager : NetworkBehaviour
             GameObject.Find("CountdownText").GetComponent<Text>().text = timeToDisplay.ToString();
         else if (timeToDisplay == 0)
             GameObject.Find("CountdownText").GetComponent<Text>().text = "GO!";
+        else if(gameState == GameState.TeamSelection)
+            GameObject.Find("CountdownText").GetComponent<Text>().text = "Press enter to start!";
         else
             GameObject.Find("CountdownText").GetComponent<Text>().text = "";
     }
