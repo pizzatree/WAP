@@ -1885,8 +1885,16 @@ MonoBehaviour:
   teamColors:
   - {fileID: 2100000, guid: 348c235d2858be8448f02a6f435bb744, type: 2}
   - {fileID: 2100000, guid: 98a751d85ffbdd34181e23e08dc26730, type: 2}
-  announcerClips: []
   playersConnected: 0
+  announcerClips:
+  - {fileID: 8300000, guid: af10b99c896cbcf44902b52694ee61cf, type: 3}
+  - {fileID: 8300000, guid: 741284175cf340c41972b7ec1b57d9d1, type: 3}
+  - {fileID: 8300000, guid: 466a4ac9d27893742af48124666a666c, type: 3}
+  - {fileID: 8300000, guid: 73bcb41ba0b7add4bb2ee348361f4433, type: 3}
+  - {fileID: 8300000, guid: c37e46ea2a93c0b4795d1f59a29608a4, type: 3}
+  - {fileID: 8300000, guid: 6c139739111db0e468ef36f8342b2cc7, type: 3}
+  - {fileID: 8300000, guid: 61edb388f38efcf4ca5281f902d95c03, type: 3}
+  - {fileID: 8300000, guid: e9d906a1d2c069f4db4d66114a46c0e2, type: 3}
 --- !u!114 &1287477582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1925,7 +1933,7 @@ AudioSource:
   m_GameObject: {fileID: 1287477580}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -9221213596628184057, guid: d7eb6e073c272774994ecb6fca3bc918, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

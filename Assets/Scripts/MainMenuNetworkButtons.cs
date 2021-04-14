@@ -58,7 +58,7 @@ public class MainMenuNetworkButtons : MonoBehaviour
         if(!NetworkClient.isConnected && NetworkClient.active)
             HandleConnecting();
         else
-            statusText.text = "";
+            statusText.text = ""; // string changes in update are bad, remove sometime
 
         HandleClientReady();
     }

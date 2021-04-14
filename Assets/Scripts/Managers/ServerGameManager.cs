@@ -18,7 +18,8 @@ public enum AnnouncerClip {
     greenBriefcaseReturn,
     purpleBriefcaseReturn,
     greenWins, // ready 
-    purpleWins // ready
+    purpleWins, // ready
+    maniacalLaugh
 }
 
 public class ServerGameManager : NetworkBehaviour
