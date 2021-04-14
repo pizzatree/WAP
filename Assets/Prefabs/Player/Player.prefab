@@ -234,6 +234,7 @@ MonoBehaviour:
   syncInterval: 0.1
   cameraTransform: {fileID: 128712694864679707}
   greenTeam: 0
+  isHoldingFlag: 0
 --- !u!114 &3468958366310671420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +313,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7416726776829028919, guid: d7eb6e073c272774994ecb6fca3bc918, type: 2}
   m_audioClip: {fileID: 8300000, guid: 188c53e96d0bb30419ff41962a5fef5f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -356,7 +357,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

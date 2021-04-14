@@ -62,10 +62,10 @@ public class ServerGameManager : NetworkBehaviour
             // RpcChangeGameState(gameState);
 
             playersConnected = FindObjectOfType<NetworkManager>().numPlayers;
-            Debug.Log("Players Connected: " + playersConnected);
+            //Debug.Log("Players Connected: " + playersConnected);
 
             if (gameState == GameState.TeamSelection) { // basically do nothing, wait until host is ready
-                Debug.Log("Game State: Team Selection");
+                //Debug.Log("Game State: Team Selection");
 
                 if (Input.GetKeyDown(KeyCode.Return)) { // this is what I'm using to "ready up" the server
                     RpcCloseDoors();
@@ -74,7 +74,7 @@ public class ServerGameManager : NetworkBehaviour
                 }
             }
             else if (gameState == GameState.GameReady) { // spawn in flags, do countdown, Open Doors
-                Debug.Log("Game State: Game Ready");
+                //Debug.Log("Game State: Game Ready");
 
                 time += Time.deltaTime;
                 if ((int)time <= 6)
@@ -88,7 +88,7 @@ public class ServerGameManager : NetworkBehaviour
                 }
             }
             else if (gameState == GameState.Game) { // Check Flag Positions(?), determine win condition
-                Debug.Log("Game State: Playing Game");
+                //Debug.Log("Game State: Playing Game");
                 greenFlag = GameObject.Find("GreenFlag(Clone)");
                 purpleFlag = GameObject.Find("PurpleFlag(Clone)");
 
@@ -125,7 +125,7 @@ public class ServerGameManager : NetworkBehaviour
                 }
             }
             else if (gameState == GameState.GameEnd) { // Reset penguin positions, wipe flags, close doors, reset win conditions
-                Debug.Log("Game State: Game Finished");
+                //Debug.Log("Game State: Game Finished");
 
                 time += Time.deltaTime;
                 if (time > 5)
