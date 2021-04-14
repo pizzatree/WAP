@@ -11,6 +11,16 @@ public enum GameState {
     GameEnd
 }
 
+public enum AnnouncerClip {
+    countdown, // ready
+    greenHasBriefcase,
+    purpleHasBriefcase,
+    greenBriefcaseReturn,
+    purpleBriefcaseReturn,
+    greenWins, // ready 
+    purpleWins // ready
+}
+
 public class ServerGameManager : NetworkBehaviour
 {
     public Transform[] teamSpawns;
@@ -18,18 +28,29 @@ public class ServerGameManager : NetworkBehaviour
     public GameObject[] teamFlags;
     public Transform[] flagSpawns;
     public Material[] teamColors;
-    public AudioClip[] announcerClips;
 
     [SyncVar] public int playersConnected;
-    double time;
-    [SyncVar] int timeToDisplay;
-    [SyncVar] int winnerIndex;
+    private double time;
+    [SyncVar] private int timeToDisplay;
+    [SyncVar] private int winnerIndex;
+    private GameObject greenFlag;
+    private GameObject purpleFlag;
+    [SyncVar] private GameObject greenFlagHolder;
+    [SyncVar] private GameObject purpleFlagHolder;
+    private double timeSinceBriefcase;
+
+    // announcer (see enum for which indices are which clips)
+    private AudioSource audioSource;
+    public AudioClip[] announcerClips;
+
 
     void Start() {
         ResetVariables();
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     void OnDisable() {
+        GameObject.Find("CountdownText").GetComponent<Text>().text = "";
         ResetVariables(true);
     }
 
@@ -48,6 +69,7 @@ public class ServerGameManager : NetworkBehaviour
                 if (Input.GetKeyDown(KeyCode.Return)) { // this is what I'm using to "ready up" the server
                     RpcCloseDoors();
                     RpcChangeGameState(GameState.GameReady);
+                    RpcPlaySound(AnnouncerClip.countdown);
                 }
             }
             else if (gameState == GameState.GameReady) { // spawn in flags, do countdown, Open Doors
@@ -64,21 +86,45 @@ public class ServerGameManager : NetworkBehaviour
                     RpcChangeGameState(GameState.Game);
                 }
             }
-            else if (gameState == GameState.Game) { // Check Flag Positions(?), Respawn Players(?), determine win condition
+            else if (gameState == GameState.Game) { // Check Flag Positions(?), determine win condition
                 Debug.Log("Game State: Playing Game");
-                if (Vector3.Distance(teamSpawns[0].transform.position, GameObject.Find("PurpleFlag(Clone)").transform.position) < 8) {
+                greenFlag = GameObject.Find("GreenFlag(Clone)");
+                purpleFlag = GameObject.Find("PurpleFlag(Clone)");
+
+                // sounds
+                // if (greenFlag.GetComponent<Flag>().isHeld) {
+                //     if (greenFlag.GetComponent<Flag>().playerHolding != this.greenFlagHolder) {
+                //         if (timeSinceBriefcase == 0)
+                //             RpcPlaySound(AnnouncerClip.greenHasBriefcase);
+                //         else
+                //             timeSinceBriefcase += Time.deltaTime;
+                //     }
+                //     RpcSetFlagHolder(0, greenFlag.GetComponent<Flag>().playerHolding);
+                // }
+                // if (purpleFlag.GetComponent<Flag>().isHeld) {
+                //     if (purpleFlag.GetComponent<Flag>().playerHolding != this.purpleFlagHolder) {
+                //         if (timeSinceBriefcase == 0)
+                //             RpcPlaySound(AnnouncerClip.greenHasBriefcase);
+                //         else
+                //             timeSinceBriefcase += Time.deltaTime;
+                //     }
+                //     RpcSetFlagHolder(1, purpleFlag.GetComponent<Flag>().playerHolding);
+                // }
+
+                // win conditions
+                if (Vector3.Distance(teamSpawns[0].transform.position, purpleFlag.transform.position) < 8) {
                     RpcSetWinner(0);
+                    RpcPlaySound(AnnouncerClip.greenWins);
                     RpcChangeGameState(GameState.GameEnd);
                 }
-                else if (Vector3.Distance(teamSpawns[1].transform.position, GameObject.Find("GreenFlag(Clone)").transform.position) < 8) {
+                else if (Vector3.Distance(teamSpawns[1].transform.position, greenFlag.transform.position) < 8) {
                     RpcSetWinner(1);
+                    RpcPlaySound(AnnouncerClip.purpleWins);
                     RpcChangeGameState(GameState.GameEnd);
                 }
             }
             else if (gameState == GameState.GameEnd) { // Reset penguin positions, wipe flags, close doors, reset win conditions
                 Debug.Log("Game State: Game Finished");
-
-                // play win sound
 
                 time += Time.deltaTime;
                 if (time > 5)
@@ -165,6 +211,29 @@ public class ServerGameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcSetWinner(int teamIndex) {
         winnerIndex = teamIndex;
+    }
+
+    [ClientRpc]
+    public void RpcPlaySound(AnnouncerClip clipID) {
+        if (announcerClips.Length <= (int)clipID) {
+            Debug.LogWarning("No AudioClip: " + clipID.ToString() + " (announcerClips[" + clipID + "])");
+            return;
+        }
+
+        audioSource.PlayOneShot(announcerClips[(int)clipID]);
+    }
+
+    // [ClientRpc]
+    private void RpcSetFlagHolder(int teamIndex, GameObject holder) {
+        if (teamIndex == 0) {
+            this.greenFlagHolder = holder;
+        }
+        else if (teamIndex == 1) {
+            this.greenFlagHolder = holder;
+        }
+        else {
+            Debug.LogWarning("Flag Holder: Invalid Team");
+        }
     }
 
 }

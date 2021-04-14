@@ -16,6 +16,7 @@ namespace Player
         public IInputs InputHandler { get; private set; }
         // public ITeam TeamHandler {get; private set; }
         [SyncVar] public bool greenTeam = false; // oh dear, it appears like I'm doing this one quick and dirty
+        [SyncVar] public bool isHoldingFlag = false;
 
         public override void OnStartLocalPlayer()
         {
@@ -56,6 +57,10 @@ namespace Player
             if(other.gameObject.layer == LayerMask.NameToLayer("Surface"))
                 SendMessage("HandleGrounded", true);
 
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
             if(other.gameObject.tag == "Finish")
             {
                 CmdSetFlagOwner(other.gameObject);
@@ -87,6 +92,7 @@ namespace Player
             else {
                 flagComp.playerHolding = this.gameObject;
                 flagComp.isHeld        = true;
+                isHoldingFlag          = true;
             }
         }
 

@@ -10,11 +10,16 @@ public class Flag : NetworkBehaviour
     void Update()
     {
         if (isHeld) {
-            this.transform.position = playerHolding.transform.position + 5*Vector3.up;
+            this.transform.position = playerHolding.transform.position + 4*Vector3.up;
 
             if (playerHolding.gameObject.GetComponent<Player.PlayerHealth>().health <= 0) {
                 // this.isHeld = false;
                 // playerHolding = null;
+                RpcRemoveHolder();
+            }
+
+            // to prevent people from BOOKING IT with the case 
+            if (Vector3.Distance(Vector3.zero, this.transform.position) > 500) {
                 RpcRemoveHolder();
             }
         }
