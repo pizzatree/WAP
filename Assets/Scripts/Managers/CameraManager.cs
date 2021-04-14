@@ -10,11 +10,6 @@ namespace Managers
     {
         public static CameraManager Instance;
 
-        private Vector3    menuPos;
-        private Quaternion menuRot;
-
-        //private Transform mainCamTransform;
-
         [SerializeField]
         private CinemachineVirtualCamera playerCam, birdsEyeCam;
 
