@@ -13,23 +13,35 @@ public class Rocket : NetworkBehaviour
 
     void Update()
     {
+        if (!isServer)
+            return;
+
         timeSinceInstantiated += Time.deltaTime;
 
         this.transform.position += travelDir*rocketSpeed;
 
         if (timeSinceInstantiated > travelTime)
         {
-            BlowUp();
+            RpcBlowUp();
         }
     }
 
     void OnCollisionEnter(Collision col)
     {
-        if (timeSinceInstantiated > 0.2f)
-            BlowUp();
+        if (!isServer)
+            return;
+
+        if (timeSinceInstantiated > 0.2f && col.gameObject.tag != "Player")
+            RpcBlowUp();
     }
 
-    private void BlowUp()
+    [Command]
+    public void CmdBlowUp(){
+        RpcBlowUp();
+    }
+
+    [ClientRpc]
+    private void RpcBlowUp()
     {
         Instantiate(explosionParticles, transform.position, Quaternion.identity, null);
         Destroy(gameObject);

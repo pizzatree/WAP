@@ -20,18 +20,30 @@ namespace Player
 
         private Rigidbody rb;
         private Animator  ani;
+        private ServerGameManager sgm;
         
         private void Start()
         {
             rb  = GetComponent<Rigidbody>();
             ani = GetComponentInChildren<Animator>();
+            sgm = GameObject.Find("[ Game Manager ]").GetComponent<ServerGameManager>();
         }
 
         private void Update()
         {
-            if(!isLocalPlayer || inputs == null)
+            if(!isLocalPlayer || inputs == null || sgm.gameState == GameState.GameEnd)
                 return;
 
+            if (sgm.gameState == GameState.TeamSelection || this.GetComponent<PlayerHealth>().health <= 0) {
+                if (GetComponent<PenguinBase>().greenTeam)
+                    this.transform.position = sgm.teamSpawns[0].position;
+                else
+                    this.transform.position = sgm.teamSpawns[1].position;
+            }
+
+            if (sgm.gameState == GameState.TeamSelection)
+                return;
+            
             rb.isKinematic = false;
 
             // basic motion & rotation
@@ -43,6 +55,8 @@ namespace Player
             ani.SetBool("isWalking",
                         moveValue.magnitude >=
                         0.01f); // should probably move this somewhere else, but this works for now
+            
+
 
             if(inputs.PressedJump() && grounded)
                 doJump = true;
@@ -57,10 +71,6 @@ namespace Player
                     doJump); // ask the server to move the way you want to
             doJump = false;
 
-            // rb.AddForce(mvmt, ForceMode.Acceleration); // old way (clientside)
-            // rb.velocity = mvmt;
-            // rb.MovePosition(rb.position + (mvmt * Time.fixedDeltaTime));
-            // rb.MoveRotation(rb.rotation * Quaternion.Euler(newRotOffset * Time.fixedDeltaTime));
         }
 
 

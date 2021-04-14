@@ -18,6 +18,9 @@ namespace Player
 
         void Update()
         {
+            if (!isLocalPlayer)
+                return;
+
             if (Input.GetMouseButtonDown(0)) {
                 Debug.Log("Launch Rocket");
                 CmdSpawnRocket();
