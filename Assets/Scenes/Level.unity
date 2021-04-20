@@ -441,11 +441,11 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: b7acb76056e87814595389625cce5b91, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 98a751d85ffbdd34181e23e08dc26730, type: 2}
+      objectReference: {fileID: 2100000, guid: 1ef13e6d119f5124ba95211b8d1bc4c3, type: 2}
     - target: {fileID: -2571118854743697038, guid: b7acb76056e87814595389625cce5b91, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 98a751d85ffbdd34181e23e08dc26730, type: 2}
+      objectReference: {fileID: 2100000, guid: 1ef13e6d119f5124ba95211b8d1bc4c3, type: 2}
     - target: {fileID: 919132149155446097, guid: b7acb76056e87814595389625cce5b91, type: 3}
       propertyPath: m_Name
       value: Purple Igloo
@@ -1883,7 +1883,7 @@ MonoBehaviour:
   - {fileID: 1182668359}
   - {fileID: 1696697893}
   teamColors:
-  - {fileID: 2100000, guid: 348c235d2858be8448f02a6f435bb744, type: 2}
+  - {fileID: 2100000, guid: 9ce755895d199bf4080815644ec60966, type: 2}
   - {fileID: 2100000, guid: 98a751d85ffbdd34181e23e08dc26730, type: 2}
   playersConnected: 0
   announcerClips:

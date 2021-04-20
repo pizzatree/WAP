@@ -50,7 +50,9 @@ namespace Player
             CameraManager.Instance?.HandleLostCharacter();
         }
 
-        private void Update() {}
+        private void Update() {
+            // gameManager.teamColors[0].SetFloat("_hue", 180);
+        }
 
         private void OnCollisionEnter(Collision other)
         {
