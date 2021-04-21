@@ -14,8 +14,9 @@ namespace Intro
             var size = GetComponentInParent<CanvasScaler>().referenceResolution;
             for(int i = 0; i < numStars; i++)
             {
-                var pos = new Vector3(Random.Range(0f, size.x), Random.Range(0f, size.y));
-                Instantiate(star, pos, Quaternion.identity, transform);
+                var pos     = new Vector3(Random.Range(0f, size.x), Random.Range(0f, size.y));
+                var newStar = Instantiate(star, Vector3.zero, Quaternion.identity, transform);
+                newStar.transform.localPosition = pos;
             }
         }
     }
