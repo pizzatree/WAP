@@ -18,7 +18,7 @@ public class MainMenuNetworkButtons : MonoBehaviour
     
     private void Start()
     {
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        SceneManager.LoadScene("Level", LoadSceneMode.Additive);
         networkManager  = FindObjectOfType<NetworkManager>();
         statusText.text = "";
     }
