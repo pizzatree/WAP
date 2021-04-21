@@ -205,7 +205,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 15f76c730de52f245b09789bf2361959, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 98a751d85ffbdd34181e23e08dc26730, type: 2}
+      objectReference: {fileID: 2100000, guid: 1ef13e6d119f5124ba95211b8d1bc4c3, type: 2}
     - target: {fileID: 919132149155446097, guid: 15f76c730de52f245b09789bf2361959, type: 3}
       propertyPath: m_Name
       value: briefcase
@@ -213,7 +213,7 @@ PrefabInstance:
     - target: {fileID: 6546414129271966489, guid: 15f76c730de52f245b09789bf2361959, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 98a751d85ffbdd34181e23e08dc26730, type: 2}
+      objectReference: {fileID: 2100000, guid: 1ef13e6d119f5124ba95211b8d1bc4c3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15f76c730de52f245b09789bf2361959, type: 3}
 --- !u!1 &4457016707552173851 stripped

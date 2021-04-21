@@ -7,10 +7,8 @@ namespace Intro
     {
         [SerializeField] private RectTransform textCrawl;
         [SerializeField] private float         crawlEnd = 1250;
-        [SerializeField] private float         crawlSpeed = 1f;
-
-        private float curY;
-
+        [SerializeField] private float         crawlSpeed = 10f;
+        
         private AudioSource audioSource;
         private float       startVolume;
 
@@ -20,12 +18,11 @@ namespace Intro
             startVolume = audioSource.volume;
         }
 
-        // Update is called once per frame
         private void Update()
         {
             textCrawl.Translate(0f, Time.deltaTime * crawlSpeed, 0f);
 
-            curY = textCrawl.localPosition.y;
+            var curY = textCrawl.localPosition.y;
             if(curY >= crawlEnd)
                 StartMenuScene();
 
