@@ -10,10 +10,12 @@ namespace Player
         public Transform rocketLaunchPos;
         
         public event Action OnFire;
+        private ServerGameManager gameManager;
 
         private void Start()
         {
             Debug.Log("Add server thrust limit to jetpack");
+            gameManager = GameObject.Find("[ Game Manager ]").GetComponent<ServerGameManager>();
         }
 
         void Update()
@@ -21,7 +23,7 @@ namespace Player
             if (!isLocalPlayer)
                 return;
 
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0) && gameManager.gameState == GameState.Game && !this.GetComponent<PlayerSlide>().GetSliding()) {
                 Debug.Log("Launch Rocket");
                 CmdSpawnRocket();
             }

@@ -20,28 +20,28 @@ namespace Player
 
         private Rigidbody rb;
         private Animator  ani;
-        private ServerGameManager sgm;
+        private ServerGameManager gameManager;
         
         private void Start()
         {
             rb  = GetComponent<Rigidbody>();
             ani = GetComponentInChildren<Animator>();
-            sgm = GameObject.Find("[ Game Manager ]").GetComponent<ServerGameManager>();
+            gameManager = GameObject.Find("[ Game Manager ]").GetComponent<ServerGameManager>();
         }
 
         private void Update()
         {
-            if(!isLocalPlayer || inputs == null || sgm.gameState == GameState.GameEnd)
+            if(!isLocalPlayer || inputs == null || gameManager.gameState == GameState.GameEnd)
                 return;
 
-            if (sgm.gameState == GameState.TeamSelection || this.GetComponent<PlayerHealth>().health <= 0) {
+            if (gameManager.gameState == GameState.TeamSelection || this.GetComponent<PlayerHealth>().health <= 0) {
                 if (GetComponent<PenguinBase>().greenTeam)
-                    this.transform.position = sgm.teamSpawns[0].position;
+                    this.transform.position = gameManager.teamSpawns[0].position;
                 else
-                    this.transform.position = sgm.teamSpawns[1].position;
+                    this.transform.position = gameManager.teamSpawns[1].position;
             }
 
-            if (sgm.gameState == GameState.TeamSelection)
+            if (gameManager.gameState == GameState.TeamSelection)
                 return;
             
             rb.isKinematic = false;
