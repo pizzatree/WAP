@@ -2844,7 +2844,7 @@ GameObject:
   - component: {fileID: 1607832659}
   m_Layer: 6
   m_Name: Bottom Plane
-  m_TagString: Untagged
+  m_TagString: Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

@@ -35,8 +35,11 @@ namespace Player
                 return;
 
             if (other.gameObject.tag == "Rocket") {
-                CmdSetHealth(0);
+                CmdDecrementHealth(50);
                 other.gameObject.GetComponent<Rocket>().CmdBlowUp();
+            }
+            else if (other.gameObject.tag == "Instakill") {
+                CmdSetHealth(0);
             }
         }
 

@@ -8,6 +8,7 @@ TagManager:
   - FxTemporaire
   - Rocket
   - Door
+  - Instakill
   layers:
   - Default
   - TransparentFX
