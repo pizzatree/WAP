@@ -10,6 +10,9 @@ namespace Player
 
         private bool startedJetpack, usingJetpack;
         private bool grounded;
+        
+        private float jetpackTimeLimit = 2.0f;
+        private float timeSinceJetpack = 0;
 
         private Rigidbody rb;
 
@@ -28,7 +31,12 @@ namespace Player
                 return;
 
             startedJetpack = !grounded      && (startedJetpack || Input.GetKeyDown(KeyCode.Space));
-            usingJetpack   = startedJetpack && Input.GetKey(KeyCode.Space);
+            usingJetpack   = startedJetpack && Input.GetKey(KeyCode.Space) && timeSinceJetpack <= jetpackTimeLimit;
+
+            if (usingJetpack)
+                timeSinceJetpack += Time.deltaTime;
+            if (grounded)
+                timeSinceJetpack = 0;
 
             foreach(var particle in particles)
             {
