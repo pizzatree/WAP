@@ -13,10 +13,10 @@ public enum GameState {
 
 public enum AnnouncerClip {
     countdown, // ready
-    greenHasBriefcase,
-    purpleHasBriefcase,
-    greenBriefcaseReturn,
-    purpleBriefcaseReturn,
+    greenHasBriefcase, // ready
+    purpleHasBriefcase, // ready
+    greenBriefcaseReturn, // ready
+    purpleBriefcaseReturn, // ready
     greenWins, // ready 
     purpleWins, // ready
     maniacalLaugh

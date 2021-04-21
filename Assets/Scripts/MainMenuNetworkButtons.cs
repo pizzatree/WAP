@@ -14,6 +14,7 @@ public class MainMenuNetworkButtons : MonoBehaviour
     [SerializeField] private GameObject[] uiInteractables;
 
     private NetworkManager networkManager;
+    private static bool loadedLevel = false; // BAD, FIX PLAYER SPAWNING BUG FIRST
     
     private void Start()
     {
@@ -61,6 +62,22 @@ public class MainMenuNetworkButtons : MonoBehaviour
             statusText.text = ""; // string changes in update are bad, remove sometime
 
         HandleClientReady();
+
+        if (!loadedLevel)
+            RemoveMenuOnLoad();
+    }
+
+    // should figure out a real fix, but this should remove the title screen
+    // when players 2-6 load into the game
+    // TODO: STOP PLAYERS FROM INSTANTIATING IN THE MENU SCENE ON CLIENTS
+    private static void RemoveMenuOnLoad() {
+        if (NetworkClient.isConnected && ClientScene.ready) {
+            GameObject[] menuObjs = GameObject.FindGameObjectsWithTag("Main Menu");
+            for (int i = 0; i < menuObjs.Length; i++) {
+                menuObjs[i].SetActive(false);
+            }
+            loadedLevel = true;
+        }
     }
 
     private static void HandleClientReady()
