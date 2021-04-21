@@ -36,9 +36,10 @@ public class ServerGameManager : NetworkBehaviour
     [SyncVar] private int winnerIndex;
     private GameObject greenFlag;
     private GameObject purpleFlag;
-    [SyncVar] private GameObject greenFlagHolder;
-    [SyncVar] private GameObject purpleFlagHolder;
-    private double timeSinceBriefcase;
+    [SyncVar] private bool greenFlagHolder = false;
+    [SyncVar] private bool purpleFlagHolder = false;
+    private bool greenCaseSoundPlayed = false;
+    private bool purpleCaseSoundPlayed = false;
 
     // announcer (see enum for which indices are which clips)
     private AudioSource audioSource;
@@ -95,24 +96,40 @@ public class ServerGameManager : NetworkBehaviour
                 purpleFlag = GameObject.Find("PurpleFlag(Clone)");
 
                 // sounds
-                // if (greenFlag.GetComponent<Flag>().isHeld) {
-                //     if (greenFlag.GetComponent<Flag>().playerHolding != this.greenFlagHolder) {
-                //         if (timeSinceBriefcase == 0)
-                //             RpcPlaySound(AnnouncerClip.greenHasBriefcase);
-                //         else
-                //             timeSinceBriefcase += Time.deltaTime;
-                //     }
-                //     RpcSetFlagHolder(0, greenFlag.GetComponent<Flag>().playerHolding);
-                // }
-                // if (purpleFlag.GetComponent<Flag>().isHeld) {
-                //     if (purpleFlag.GetComponent<Flag>().playerHolding != this.purpleFlagHolder) {
-                //         if (timeSinceBriefcase == 0)
-                //             RpcPlaySound(AnnouncerClip.greenHasBriefcase);
-                //         else
-                //             timeSinceBriefcase += Time.deltaTime;
-                //     }
-                //     RpcSetFlagHolder(1, purpleFlag.GetComponent<Flag>().playerHolding);
-                // }
+                if (greenFlagHolder == true) {
+                    // Debug.Log("[GREEN FLAG IS HELD]");
+                    if (!greenCaseSoundPlayed) {
+                        greenCaseSoundPlayed = true;
+                        RpcPlaySound(AnnouncerClip.purpleHasBriefcase);
+                        // Debug.Log("[PURPLE HAS GREEN BRIEFCASE]");
+                    }
+                }
+                else {
+                    if (greenCaseSoundPlayed) {
+                        greenCaseSoundPlayed = false;
+                        RpcPlaySound(AnnouncerClip.greenBriefcaseReturn);
+                    }
+                }
+
+                if (purpleFlagHolder == true) {
+                    // Debug.Log("[PURPLE FLAG IS HELD]");
+                    if (!purpleCaseSoundPlayed) {
+                        purpleCaseSoundPlayed = true;
+                        RpcPlaySound(AnnouncerClip.greenHasBriefcase);
+                        // Debug.Log("[GREEN HAS PURPLE BRIEFCASE]");
+                    }
+                }
+                else {
+                    if (purpleCaseSoundPlayed) {
+                        purpleCaseSoundPlayed = false;
+                        RpcPlaySound(AnnouncerClip.purpleBriefcaseReturn);
+                    }
+                }
+
+                // RpcSetFlagHolder(0, greenFlag.GetComponent<Flag>().isHeld);
+                greenFlagHolder = greenFlag.GetComponent<Flag>().isHeld;
+                // RpcSetFlagHolder(1, purpleFlag.GetComponent<Flag>().isHeld);
+                purpleFlagHolder = purpleFlag.GetComponent<Flag>().isHeld;
 
                 // win conditions
                 if (Vector3.Distance(teamSpawns[0].transform.position, purpleFlag.transform.position) < 8) {
@@ -228,13 +245,13 @@ public class ServerGameManager : NetworkBehaviour
         audioSource.PlayOneShot(announcerClips[(int)clipID]);
     }
 
-    // [ClientRpc]
-    private void RpcSetFlagHolder(int teamIndex, GameObject holder) {
+    [ClientRpc]
+    private void RpcSetFlagHolder(int teamIndex, bool held) {
         if (teamIndex == 0) {
-            this.greenFlagHolder = holder;
+            this.greenFlagHolder = held;
         }
         else if (teamIndex == 1) {
-            this.greenFlagHolder = holder;
+            this.greenFlagHolder = held;
         }
         else {
             Debug.LogWarning("Flag Holder: Invalid Team");

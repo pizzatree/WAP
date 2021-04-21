@@ -7,6 +7,11 @@ public class Flag : NetworkBehaviour
     [SyncVar] public GameObject playerHolding;
     [SyncVar] public bool greenTeam;
 
+    void Awake() {
+        isHeld = false;
+        playerHolding = null;
+    }
+
     void Update()
     {
         if (isHeld) {
