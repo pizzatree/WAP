@@ -41,8 +41,11 @@ namespace Player
                     this.transform.position = gameManager.teamSpawns[1].position;
             }
 
-            if (gameManager.gameState == GameState.TeamSelection)
+            if (gameManager.gameState == GameState.TeamSelection) {
+                moveValue = Vector3.zero;
+                rb.velocity = Vector3.zero;
                 return;
+            }
             
             rb.isKinematic = false;
 
