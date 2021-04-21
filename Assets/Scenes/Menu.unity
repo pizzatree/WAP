@@ -3138,11 +3138,14 @@ MonoBehaviour:
   m_Text: '
 
 
-    -Assets-
+    -External Assets-
 
     JMO Cartoon FX Pack
 
-    [background music credit]'
+    City Run - Rafael
+    Krux
+
+    Kenney.nl'
 --- !u!222 &951825898
 CanvasRenderer:
   m_ObjectHideFlags: 0
