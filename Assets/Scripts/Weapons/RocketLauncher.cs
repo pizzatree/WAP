@@ -25,17 +25,18 @@ namespace Player
 
             if (Input.GetMouseButtonDown(0) && gameManager.gameState == GameState.Game && !this.GetComponent<PlayerSlide>().GetSliding()) {
                 Debug.Log("Launch Rocket");
-                CmdSpawnRocket();
+                CmdSpawnRocket(this.GetComponent<PenguinBase>().greenTeam);
             }
         }
 
         [Command]
-        void CmdSpawnRocket() {
+        void CmdSpawnRocket(bool greenTeam) {
             
             OnFire?.Invoke();
 
             GameObject rocket = GameObject.Instantiate(rocketPrefab, rocketLaunchPos.position, rocketLaunchPos.rotation) as GameObject;
             rocket.GetComponent<Rocket>().travelDir = this.transform.forward;
+            rocket.GetComponent<Rocket>().greenTeam = greenTeam;
             NetworkServer.Spawn(rocket);
         }
 

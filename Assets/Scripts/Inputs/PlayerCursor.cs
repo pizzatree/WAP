@@ -6,7 +6,8 @@ namespace Inputs
     public class PlayerCursor : MonoBehaviour
     {
         private IInputs inputs;
-        
+        private bool pressedEscape = false;
+
         private void OnEnable()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -23,13 +24,17 @@ namespace Inputs
 
         private void Update()
         {
-            if(inputs == null)
-                return;
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                pressedEscape = !pressedEscape;
+            }
+
+            // if(inputs == null)s
+            //     return;
             
-            Cursor.lockState = (inputs.PressedPause())
+            Cursor.lockState = (pressedEscape)
                 ? CursorLockMode.None
                 : CursorLockMode.Confined;
-            Cursor.visible = (Cursor.lockState != CursorLockMode.Confined);
+            Cursor.visible = (pressedEscape);
         }
     }
 }

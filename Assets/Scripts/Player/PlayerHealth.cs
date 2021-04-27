@@ -35,8 +35,10 @@ namespace Player
                 return;
 
             if (other.gameObject.tag == "Rocket") {
-                CmdDecrementHealth(50);
-                other.gameObject.GetComponent<Rocket>().CmdBlowUp();
+                if (other.gameObject.GetComponent<Rocket>().greenTeam != this.GetComponent<PenguinBase>().greenTeam) {
+                    CmdSetHealth(0);
+                    other.gameObject.GetComponent<Rocket>().CmdBlowUp();
+                }
             }
             else if (other.gameObject.tag == "Instakill") {
                 CmdSetHealth(0);

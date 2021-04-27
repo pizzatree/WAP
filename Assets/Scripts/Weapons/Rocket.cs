@@ -10,6 +10,7 @@ public class Rocket : NetworkBehaviour
     public float travelTime = 2.0f;
 
     [SerializeField] private GameObject explosionParticles;
+    [SyncVar] public bool greenTeam;
 
     void Update()
     {
@@ -31,7 +32,7 @@ public class Rocket : NetworkBehaviour
         if (!isServer)
             return;
 
-        if (timeSinceInstantiated > 0.2f && col.gameObject.tag != "Player")
+        if (timeSinceInstantiated > 0.1f && col.gameObject.tag != "Player")
             RpcBlowUp();
     }
 
