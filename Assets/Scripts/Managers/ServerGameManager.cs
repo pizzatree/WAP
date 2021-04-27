@@ -73,6 +73,9 @@ public class ServerGameManager : NetworkBehaviour
                     RpcCloseDoors();
                     RpcChangeGameState(GameState.GameReady);
                     RpcPlaySound(AnnouncerClip.countdown);
+                    for (int i = playersConnected; i < 12; i++) {
+                        SpawnAI(i%2 == 1);
+                    }
                 }
             }
             else if (gameState == GameState.GameReady) { // spawn in flags, do countdown, Open Doors
@@ -187,6 +190,15 @@ public class ServerGameManager : NetworkBehaviour
             RpcCloseDoors();
             RpcDestroyFlags();
             RpcSetWinner(-1);
+        }
+    }
+
+    private void SpawnAI(bool greenTeam) {
+        if (greenTeam) {
+            Debug.Log("Spawning green AI");
+        }
+        else {
+            Debug.Log("Spawning purple AI");
         }
     }
 
