@@ -23,13 +23,13 @@ namespace Inputs
 
         private void Update()
         {
-            if(inputs != null && !inputs.PressedPause() )
+            if(inputs == null)
                 return;
             
-            Cursor.lockState = (Cursor.lockState != CursorLockMode.None)
+            Cursor.lockState = (inputs.PressedPause())
                 ? CursorLockMode.None
                 : CursorLockMode.Confined;
-            Cursor.visible = !Cursor.visible;
+            Cursor.visible = (Cursor.lockState != CursorLockMode.Confined);
         }
     }
 }
