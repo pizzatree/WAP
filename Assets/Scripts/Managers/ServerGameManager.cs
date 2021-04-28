@@ -78,6 +78,7 @@ public class ServerGameManager : NetworkBehaviour
                     RpcCloseDoors();
                     RpcChangeGameState(GameState.GameReady);
                     RpcPlaySound(AnnouncerClip.countdown);
+
                     for (int i = playersConnected; i < 12; i++) {
                         SpawnAI(i%2 == 1);
                     }
@@ -188,6 +189,12 @@ public class ServerGameManager : NetworkBehaviour
 
         foreach (GameObject flag in GameObject.FindGameObjectsWithTag("Finish"))
             GameObject.Destroy(flag);
+        
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
+            if (player.GetComponent<PenguinMove>().isBot) {
+                GameObject.Destroy(player);                
+            }
+        }
 
         if (!local && isServer) {
             RpcChangeGameState(GameState.TeamSelection);
@@ -204,7 +211,7 @@ public class ServerGameManager : NetworkBehaviour
         var pos              = desiredTransform.position;
         pos += new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
         
-        var bot = Instantiate(aiPenguin, pos, desiredTransform.rotation);
+        GameObject bot = GameObject.Instantiate(aiPenguin, pos, desiredTransform.rotation) as GameObject;
         NetworkServer.Spawn(bot);
         bot.GetComponent<PenguinBase>().StartBot(greenTeam);
     }
