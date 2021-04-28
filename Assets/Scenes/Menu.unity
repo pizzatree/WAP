@@ -2385,7 +2385,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 315, y: 75}
+  m_SizeDelta: {x: 556.42, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810135785
 MonoBehaviour:
@@ -2407,9 +2407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'JUMP
-
-'
+  m_text: JUMP / JETPACK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e11517139ac5874d8cafff286cfe3d7, type: 2}
   m_sharedMaterial: {fileID: 4282915436768850320, guid: 0e11517139ac5874d8cafff286cfe3d7, type: 2}
@@ -2437,9 +2435,9 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 59.2
-  m_fontSizeBase: 36
+  m_fontSizeBase: 59.2
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

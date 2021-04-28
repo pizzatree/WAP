@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Player;
 using UnityEngine.UI;
 
 public enum GameState {
@@ -41,9 +42,13 @@ public class ServerGameManager : NetworkBehaviour
     private bool greenCaseSoundPlayed = false;
     private bool purpleCaseSoundPlayed = false;
 
+    [Header("Announcer")]
     // announcer (see enum for which indices are which clips)
     private AudioSource audioSource;
     public AudioClip[] announcerClips;
+
+    [Header("AI")] 
+    [SerializeField] private GameObject aiPenguin;
 
 
     void Start() {
@@ -193,13 +198,15 @@ public class ServerGameManager : NetworkBehaviour
         }
     }
 
-    private void SpawnAI(bool greenTeam) {
-        if (greenTeam) {
-            Debug.Log("Spawning green AI");
-        }
-        else {
-            Debug.Log("Spawning purple AI");
-        }
+    private void SpawnAI(bool greenTeam)
+    {
+        var desiredTransform = greenTeam ? teamSpawns[0] : teamSpawns[1];
+        var pos              = desiredTransform.position;
+        pos += new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
+        
+        var bot = Instantiate(aiPenguin, pos, desiredTransform.rotation);
+        NetworkServer.Spawn(bot);
+        bot.GetComponent<PenguinBase>().StartBot(greenTeam);
     }
 
     private void SpawnFlags(bool green, bool purple) {

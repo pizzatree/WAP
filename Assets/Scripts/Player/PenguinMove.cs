@@ -21,9 +21,13 @@ namespace Player
         private Rigidbody rb;
         private Animator  ani;
         private ServerGameManager gameManager;
+
+        private bool isBot;
         
         private void Start()
         {
+            isBot = isServer && !isLocalPlayer;
+
             rb  = GetComponent<Rigidbody>();
             ani = GetComponentInChildren<Animator>();
             gameManager = GameObject.Find("[ Game Manager ]").GetComponent<ServerGameManager>();
@@ -31,7 +35,7 @@ namespace Player
 
         private void Update()
         {
-            if(!isLocalPlayer || inputs == null || gameManager.gameState == GameState.GameEnd)
+            if( (!isLocalPlayer && !isBot) || inputs == null || gameManager.gameState == GameState.GameEnd)
                 return;
 
             if (gameManager.gameState == GameState.TeamSelection || this.GetComponent<PlayerHealth>().health <= 0) {
@@ -59,18 +63,19 @@ namespace Player
                         moveValue.magnitude >=
                         0.01f); // should probably move this somewhere else, but this works for now
             
-
-
             if(inputs.PressedJump() && grounded)
                 doJump = true;
         }
 
         private void FixedUpdate()
         {
-            if(!isLocalPlayer)
+            if(!isLocalPlayer && !isBot)
                 return;
 
-            CmdMove(this.GetComponent<PlayerSlide>().GetSliding(),
+            if(isBot)
+                RpcBotMove(GetComponent<PlayerSlide>().GetSliding(), doJump);
+            else
+                CmdMove(this.GetComponent<PlayerSlide>().GetSliding(),
                     doJump); // ask the server to move the way you want to
             doJump = false;
 
@@ -81,6 +86,18 @@ namespace Player
         private void CmdMove(bool sliding, bool jumping)
         {
             // tell the server to update the movement of the players
+            if(sliding)
+                RpcMoveSlide();
+            else
+                RpcMove();
+
+            if(jumping)
+                RpcJump();
+        }
+
+        [ClientRpc]
+        private void RpcBotMove(bool sliding, bool jumping)
+        {
             if(sliding)
                 RpcMoveSlide();
             else

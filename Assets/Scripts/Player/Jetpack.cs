@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Jetpack : NetworkBehaviour
+    public class Jetpack : ReceivesInputs
     {
         [SerializeField] private float      verticalThrust = 15f;
         [SerializeField] private ParticleSystem[] particles;
@@ -16,8 +16,12 @@ namespace Player
 
         private Rigidbody rb;
 
+        private bool isBot;
+
         private void Start()
         {
+            isBot = isServer && !isLocalPlayer;
+
             Debug.Log("Add server thrust limit to jetpack");
             Debug.Log("Stop hardcoding jetpack, use inputs class when made");
 
@@ -27,11 +31,11 @@ namespace Player
 
         private void Update()
         {
-            if(!isLocalPlayer)
+            if(!isLocalPlayer && !isBot)
                 return;
 
-            startedJetpack = !grounded      && (startedJetpack || Input.GetKeyDown(KeyCode.Space));
-            usingJetpack   = startedJetpack && Input.GetKey(KeyCode.Space) && timeSinceJetpack <= jetpackTimeLimit;
+            startedJetpack = !grounded      && (startedJetpack || inputs.PressedJump());
+            usingJetpack   = startedJetpack && inputs.HoldingJump() && timeSinceJetpack <= jetpackTimeLimit;
 
             if (usingJetpack)
                 timeSinceJetpack += Time.deltaTime;
@@ -49,7 +53,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            if(!isLocalPlayer || !usingJetpack)
+            if((!isLocalPlayer && !isBot) || !usingJetpack)
                 return;
 
             var force = new Vector3(0f, verticalThrust, 0f);

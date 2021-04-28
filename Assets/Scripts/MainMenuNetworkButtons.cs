@@ -89,7 +89,7 @@ public class MainMenuNetworkButtons : MonoBehaviour
             if(ClientScene.localPlayer == null)
             {
                 ClientScene.AddPlayer();
-                SceneManager.UnloadScene(0);
+                SceneManager.UnloadScene(1);
             }
         }
     }

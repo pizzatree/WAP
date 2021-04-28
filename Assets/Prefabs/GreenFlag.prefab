@@ -34,6 +34,7 @@ GameObject:
   - component: {fileID: 8749638336448414314}
   - component: {fileID: 7903165236703812561}
   - component: {fileID: 1425919653838021151}
+  - component: {fileID: 8765846521330127193}
   m_Layer: 0
   m_Name: GreenFlag
   m_TagString: Finish
@@ -151,6 +152,18 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 4134739044683120849}
+--- !u!114 &8765846521330127193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668838885091114903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e532df82c5498f96c8c026990472be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3538677865835782730
 PrefabInstance:
   m_ObjectHideFlags: 0

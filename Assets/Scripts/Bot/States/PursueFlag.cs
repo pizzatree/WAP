@@ -7,19 +7,23 @@ namespace Bot.States
     public class PursueFlag : IState
     {
         private NavMeshAgent agent;
+        private bool         pursueGreen;
 
-        // pro tip: when adding new fields in Rider
-        // "ctorf" auto populates constructor with said fields
-        public PursueFlag(NavMeshAgent agent)
+        public PursueFlag(NavMeshAgent agent, bool pursueGreen)
         {
-            this.agent = agent;
+            this.agent       = agent;
+            this.pursueGreen = pursueGreen;
         }
-    
+
         public void Tick()
         {
             // basically update
             if (agent != null) {
-                agent.SetDestination(GameObject.Find("Flag").transform.position);
+                var findFlagName = (pursueGreen) ? "GreenFlag" : "PurpleFlag";
+                var flagObj      = GameObject.Find(findFlagName   + "(Clone)");
+                
+                if(flagObj)
+                    agent.SetDestination(flagObj.transform.position);
             }
         }
 
@@ -35,8 +39,5 @@ namespace Bot.States
             agent.enabled = false;
         }
 
-        // find target()
-        // move()
-        // etc. 
     }
 }

@@ -33,7 +33,7 @@ namespace Inputs
             => Input.GetKey(KeyCode.LeftControl);
 
         public bool PressedFire()
-            => Input.GetMouseButton(0);
+            => Input.GetMouseButtonDown(0);
     
         public bool PressedReload()
             => Input.GetKey(KeyCode.R);

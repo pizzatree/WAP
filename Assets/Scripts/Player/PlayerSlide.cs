@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerSlide : NetworkBehaviour
+    public class PlayerSlide : ReceivesInputs
     {
         [SerializeField] private PhysicMaterial regPMat, slidePMat;
 
@@ -13,18 +13,22 @@ namespace Player
         private Collider[] colliders;
         private Animator ani;
 
+        private bool isBot;
+
         private void Start()
         {
+            isBot = isServer && !isLocalPlayer;
+
             colliders = GetComponentsInChildren<Collider>();
             ani = GetComponentInChildren<Animator>();
         }
 
         private void Update()
         {
-            if(!isLocalPlayer)
+            if(!isLocalPlayer && !isBot)
                 return;
 
-            var newSlide = Input.GetKey(KeyCode.LeftControl);
+            var newSlide =inputs.HoldingSlide();
             if(newSlide == sliding) 
                 return;
             

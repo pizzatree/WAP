@@ -6,7 +6,7 @@ using Player;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Bot
+namespace Bot // SHOVING THIS IN PENGUIN BASE FOR NOW
 {
     public class BotBase : NetworkBehaviour
     {
@@ -34,22 +34,22 @@ namespace Bot
 
         private void CreateStates()
         {
-            sm = new StateMachine();
-
-            var findFlag = new PursueFlag(agent);
-            var aggro    = new Aggro(movement);
-
-            // sm.AddTransition(aggro, findFlag, EnemyIsWithinRange());
-            // sm.AddTransition(aggro, findFlag, EnemyIsNotWithinRange());
-            sm.SetState(findFlag);
-
-            Func<bool> EnemyIsWithinRange() => () => 15f >= Vector3.Distance(transform.position, (FindObjectsOfType<Purple>())
-                .OrderBy(t=> Vector3.Distance(transform.position, t.transform.position))
-                .FirstOrDefault().GetComponent<Transform>().position);
-            
-            Func<bool> EnemyIsNotWithinRange() => () => 15f < Vector3.Distance(transform.position, (FindObjectsOfType<Purple>())
-                .OrderBy(t=> Vector3.Distance(transform.position, t.transform.position))
-                .FirstOrDefault().GetComponent<Transform>().position);
+            // sm = new StateMachine();
+            //
+            // var findFlag = new PursueFlag(agent);
+            // var aggro    = new Aggro(movement);
+            //
+            // // sm.AddTransition(aggro, findFlag, EnemyIsWithinRange());
+            // // sm.AddTransition(aggro, findFlag, EnemyIsNotWithinRange());
+            // sm.SetState(findFlag);
+            //
+            // Func<bool> EnemyIsWithinRange() => () => 15f >= Vector3.Distance(transform.position, (FindObjectsOfType<Purple>())
+            //     .OrderBy(t=> Vector3.Distance(transform.position, t.transform.position))
+            //     .FirstOrDefault().GetComponent<Transform>().position);
+            //
+            // Func<bool> EnemyIsNotWithinRange() => () => 15f < Vector3.Distance(transform.position, (FindObjectsOfType<Purple>())
+            //     .OrderBy(t=> Vector3.Distance(transform.position, t.transform.position))
+            //     .FirstOrDefault().GetComponent<Transform>().position);
         }
     }
 }
