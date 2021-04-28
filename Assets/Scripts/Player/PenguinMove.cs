@@ -22,11 +22,11 @@ namespace Player
         private Animator  ani;
         private ServerGameManager gameManager;
 
-        private bool isBot;
+        public bool isBot;
         
         private void Start()
         {
-            isBot = isServer && !isLocalPlayer;
+            // isBot = isServer && !isLocalPlayer;
 
             rb  = GetComponent<Rigidbody>();
             ani = GetComponentInChildren<Animator>();
