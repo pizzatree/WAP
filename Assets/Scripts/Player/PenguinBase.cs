@@ -73,11 +73,16 @@ namespace Player
             sm = new StateMachine();
 
             var findFlag = new PursueFlag(navMeshAgent, !greenTeam);
+            var returnHome = new ReturnHome(navMeshAgent, greenTeam);
             //var aggro    = new Aggro(movement);
 
             // sm.AddTransition(aggro, findFlag, EnemyIsWithinRange());
             // sm.AddTransition(aggro, findFlag, EnemyIsNotWithinRange());
+            sm.AddTransition(findFlag, returnHome, HoldingFlag());
+            // sm.AddTransition(returnHome, findFlag, !isHoldingFlag);
             sm.SetState(findFlag);
+
+            Func<bool> HoldingFlag() => () => isHoldingFlag;
 
             // Func<bool> EnemyIsWithinRange() => () => 15f >= Vector3.Distance(transform.position, (FindObjectsOfType<Purple>())
             //                                                                  .OrderBy(t=> Vector3.Distance(transform.position, t.transform.position))

@@ -28,7 +28,7 @@ namespace Player
             if(!isLocalPlayer && !isBot)
                 return;
 
-            var newSlide = Input.GetKey(KeyCode.LeftControl);
+            var newSlide =inputs.HoldingSlide();
             if(newSlide == sliding) 
                 return;
             
