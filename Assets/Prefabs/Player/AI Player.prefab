@@ -33,6 +33,10 @@ PrefabInstance:
       propertyPath: clientAuthority
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 594081299351271827, guid: 5758a9992a9d28d4aa56d3c6785fa54f, type: 3}
+      propertyPath: isBot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4146188570347935541, guid: 5758a9992a9d28d4aa56d3c6785fa54f, type: 3}
       propertyPath: m_AssetId
       value: 
